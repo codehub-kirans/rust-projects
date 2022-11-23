@@ -17,6 +17,17 @@ fn dies_no_args() -> TestResult {
     
 }
 
+fn run(args: &[&str], expected_file: &str) -> TestResult {
+    let expected = fs::read_to_string(expected_file)?;
+    Command::cargo_bin("echor")?
+    .args(args)
+    .assert()
+    .success()
+    .stdout(expected);
+
+    Ok(())
+}
+
 #[test]
 fn runs() -> TestResult {
     let mut cmd = Command::cargo_bin("echor")?;
@@ -28,21 +39,24 @@ fn runs() -> TestResult {
 #[test]
 fn hello1() -> TestResult {
     let outfile = "tests/expected/hello1.txt";
-    let expected = fs::read_to_string(outfile)?;
-    let mut cmd = Command::cargo_bin("echor")?;
+    run(&["Hello there"], outfile)
 
-    cmd.arg("Hello there").assert().success().stdout(expected);
-
-    Ok(())
 }
 
 #[test]
 fn hello2() -> TestResult {
     let outfile = "tests/expected/hello2.txt";
-    let expected = fs::read_to_string(outfile)?;
-    let mut cmd = Command::cargo_bin("echor")?;
+    run(&["Hello", "there"], outfile)
+}
 
-    cmd.args(vec!["Hello", "there"]).assert().success().stdout(expected);
+#[test]
+fn hello3() -> TestResult {
+    let outfile = "tests/expected/hello1.n.txt";
+    run(&["Hello  there", "-n"], outfile)
+}
 
-    Ok(())
+#[test]
+fn hello4() -> TestResult {
+    let outfile = "tests/expected/hello2.n.txt";
+    run(&["-n", "Hello", "there"], outfile)
 }
