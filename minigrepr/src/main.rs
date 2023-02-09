@@ -5,7 +5,7 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     //dbg!(&args);
 
-    let config = parse_config(&args);
+    let config = Config::new(&args);
     println!("Searching for \"{}\" in file: {}", config.query, config.file_path);
 
     let contents = fs::read_to_string(config.file_path)
@@ -19,9 +19,14 @@ struct Config {
     file_path: String
 }
 
-fn parse_config(args: &Vec<String>) -> Config {
-   Config {
-    query: args[1].clone(),
-    file_path: args[2].clone()
-   }
+impl Config {
+    fn new(args: &Vec<String>) -> Config {
+        if args.len() < 3 {
+            panic!("Not enough arguments")
+        }
+        Config {
+         query: args[1].clone(),
+         file_path: args[2].clone()
+        }
+     }
 }
