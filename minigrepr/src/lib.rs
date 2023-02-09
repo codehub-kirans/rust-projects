@@ -1,31 +1,31 @@
-use std::fs;
-use std::error::Error;
 use std::env;
+use std::error::Error;
+use std::fs;
 
 pub struct Config {
     pub query: String,
     pub file_path: String,
-    pub ignore_case: bool
+    pub ignore_case: bool,
 }
 
 impl Config {
     pub fn build(args: &Vec<String>) -> Result<Config, &'static str> {
         if args.len() < 3 {
-           return Err("not enough arguments");  
+            return Err("not enough arguments");
         }
 
         let ignore_case = env::var("IGNORE_CASE").is_ok();
         println!("Ignore case is {}", ignore_case);
-        
+
         Ok(Config {
-         query: args[1].clone(),
-         file_path: args[2].clone(),
-         ignore_case
+            query: args[1].clone(),
+            file_path: args[2].clone(),
+            ignore_case,
         })
-     }
+    }
 }
 
-pub fn run(config: Config) -> Result<(), Box<dyn Error>>{
+pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let contents = fs::read_to_string(config.file_path)?;
 
     let results = if config.ignore_case {
@@ -33,7 +33,7 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>>{
     } else {
         search(&config.query, &contents)
     };
-    
+
     for line in results {
         println!("{}", line);
     }

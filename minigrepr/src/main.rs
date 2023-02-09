@@ -12,16 +12,12 @@ fn main() {
         eprintln!("Problem parsing arguments: {err}");
         process::exit(1);
     });
-    
+
     println!("Searching for \"{}\" \nIn file {}", config.query, config.file_path);
 
     //use if let idiom if a function returns only Err(e) on error and () on success
     if let Err(e) = minigrepr::run(config) {
         eprintln!("Application Error: {}", e);
         process::exit(1);
-    }    
+    }
 }
-
-
-
-
