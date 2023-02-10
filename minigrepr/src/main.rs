@@ -17,7 +17,7 @@ fn main() {
 
     //use if let idiom if a function returns only Err(e) on error and () on success
     if let Err(e) = minigrepr::run(config) {
-        eprintln!("Application Error: {}", e);
+        eprintln!("Application Error: {e}");
         process::exit(1);
     }
 }

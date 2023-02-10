@@ -15,7 +15,7 @@ impl Config {
         }
 
         let ignore_case = env::var("IGNORE_CASE").is_ok();
-        println!("Ignore case is {}", ignore_case);
+        println!("Ignore case is {ignore_case}");
 
         Ok(Config {
             query: args[1].clone(),
@@ -35,7 +35,7 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     };
 
     for line in results {
-        println!("{}", line);
+        println!("{line}");
     }
 
     Ok(())
