@@ -5,9 +5,12 @@ edition = "2021"
 authors = ["Kiran S", "Kiran S <codehub.kirans@gmail.com>"]
 description = "A simplified version of the classic command line search tool grep that searches a specified file for a specified string. Not intended for general use."
 repository = "https://github.com/codehub-kirans/rust-projects/tree/main/minigrepr"
+readme = "README.md"
 categories = ["command-line-utilities"]
 license = "MIT OR Apache-2.0"
 
+[[bin]]
+name = "minigrepr"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
