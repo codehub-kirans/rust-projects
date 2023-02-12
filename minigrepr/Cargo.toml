@@ -1,6 +1,6 @@
 [package]
 name = "minigrepr"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 authors = ["Kiran S", "Kiran S <codehub.kirans@gmail.com>"]
 description = "A simplified version of the classic command line search tool grep that searches a specified file for a specified string. Not intended for general use."
