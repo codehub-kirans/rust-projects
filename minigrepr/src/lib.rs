@@ -1,3 +1,7 @@
+//! #minigrepr
+//! 
+//! `minigrepr` is a collection of search functions for searching a given query in a file
+
 use std::env;
 use std::error::Error;
 use std::fs;
@@ -49,6 +53,20 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
+/// Case sensitive search of query in the given file contents
+///
+/// # Examples
+///
+/// ```
+/// use minigrepr::search;
+///        let query = "duct";
+/// let contents = "\
+/// Rust:
+/// safe, fast, productive.
+/// Pick three.
+/// Duct tape.";
+/// assert_eq!(search(query, contents), vec!["safe, fast, productive."] );
+/// ```
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     /*
     let mut results = Vec::new();
@@ -67,6 +85,21 @@ pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
         .collect()
 }
 
+/// Case insensitive search of query in the given file contents
+///
+/// # Examples
+///
+/// ```
+/// use minigrepr::search_case_insenstive;
+///        let query = "duct";
+/// let query = "rUsT";
+/// let contents = "\
+/// Rust:
+/// safe, fast, productive.
+/// Pick three.
+/// Trust me.";
+/// assert_eq!(search_case_insenstive(query, contents), vec!["Rust:", "Trust me."]);
+/// ```
 pub fn search_case_insenstive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     let query = query.to_lowercase();
 
