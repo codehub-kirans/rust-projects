@@ -4,11 +4,11 @@ use std::process;
 use minigrepr::Config;
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
+    let args = env::args();
     //dbg!(&args);
 
     //use unwrap_or_else idiom when a function returns a Result with Ok(v) on success or Err(e) on error
-    let config = Config::build(&args).unwrap_or_else(|err| {
+    let config = Config::build(args).unwrap_or_else(|err| {
         eprintln!("Problem parsing arguments: {err}");
         process::exit(1);
     });
