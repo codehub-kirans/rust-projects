@@ -7,5 +7,6 @@ Minigrepr is a simplified version of the classic command line search tool grep t
 minigrepr is currently licensed under the terms of both the MIT license and the
 Apache License (Version 2.0).
 
-Thanks,
-Kiran
+Thanks,  
+Kiran S  
+https://www.kirans.in  
