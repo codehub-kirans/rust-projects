@@ -23,6 +23,7 @@ fn main() {
         children: RefCell::new(vec![Rc::clone(&leaf)]),
     });
 
+    *leaf.parent.borrow_mut() = Rc::downgrade(&root);
     println!("Leaf: {:?}", leaf);
     println!("Root: {:?}", root);
 }
