@@ -1,4 +1,7 @@
-use std::{ thread, sync::{ mpsc, Mutex, Arc } };
+use std::{
+    sync::{mpsc, Arc, Mutex},
+    thread,
+};
 
 type Job = Box<dyn FnOnce() + Send + 'static>;
 struct Worker {
@@ -9,16 +12,16 @@ struct Worker {
 impl Worker {
     pub fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Job>>>) -> Worker {
         println!("Creating Worker {id}.");
-        
-        // create a thread that continuously loops checking the channel for jobs 
+
+        // create a thread that continuously loops checking the channel for jobs
         let thread = thread::spawn(move || loop {
             let msg = receiver.lock().unwrap().recv();
             match msg {
                 Ok(job) => {
                     println!("Worker {id} receiver job; executing...");
                     job();
-                },
-                Err(e) => {
+                }
+                Err(_e) => {
                     println!("Worker {id} received disconnection request. Shutting down");
                     break;
                 }
@@ -61,10 +64,16 @@ impl ThreadPool {
         for id in 0..size {
             worker_threads.push(Worker::new(id + 1, Arc::clone(&receiver))); //create threads
         }
-        ThreadPool { worker_threads, sender: Some(sender) }
+        ThreadPool {
+            worker_threads,
+            sender: Some(sender),
+        }
     }
 
-    pub fn execute<T>(&self, f: T) where T: FnOnce() + Send + 'static {
+    pub fn execute<T>(&self, f: T)
+    where
+        T: FnOnce() + Send + 'static,
+    {
         let job = Box::new(f);
         self.sender.as_ref().unwrap().send(job).unwrap();
     }
@@ -72,8 +81,7 @@ impl ThreadPool {
 
 impl Drop for ThreadPool {
     fn drop(&mut self) {
-
-        //close the channel by dropping the sender end 
+        //close the channel by dropping the sender end
         //so that the receiver end receives error to exit the worker thread's loop
         drop(self.sender.take());
 
