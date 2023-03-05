@@ -9,7 +9,7 @@ For example to run the server with 10 worker threads listening at port 8787, run
 
 ## License
 
-minigrepr is currently licensed under the terms of both the MIT license and the
+mini-web-server is currently licensed under the terms of both the MIT license and the
 Apache License (Version 2.0).
 
 Thanks,  
