@@ -1,4 +1,4 @@
-# Simple Web Server
+# Mini Web Server
 
 A mini HTTP web server that uses a thread pool to respond asynchronously.
 

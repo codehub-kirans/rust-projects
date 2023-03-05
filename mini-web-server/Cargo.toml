@@ -1,6 +1,6 @@
 [package]
 name = "mini-web-server"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["Kiran S", "Kiran S <codehub.kirans@gmail.com>"]
 description = "A mini HTTP web server that uses a thread pool to respond asynchronously. Not intended for general use."
