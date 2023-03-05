@@ -1,9 +1,9 @@
 [package]
-name = "simple-web-server"
+name = "mini-web-server"
 version = "0.1.0"
 edition = "2021"
 authors = ["Kiran S", "Kiran S <codehub.kirans@gmail.com>"]
-description = "A simple HTTP web server that uses a thread pool to respond asynchronously. Not intended for general use."
+description = "A mini HTTP web server that uses a thread pool to respond asynchronously. Not intended for general use."
 readme = "README.md"
 categories = ["network-programming", "web-programming::http-server"]
 license = "MIT OR Apache-2.0"
