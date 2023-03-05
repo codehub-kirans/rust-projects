@@ -1,3 +1,0 @@
-[submodule "mini-web-server"]
-	path = mini-web-server
-	url = ./mini-web-server
