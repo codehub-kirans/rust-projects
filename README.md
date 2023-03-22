@@ -1,3 +1,3 @@
 # rust-projects
 
-Reimplementation of the basic functionality of Linux commands in Rust
+A collection of rust projects to get upto speed on Rust.
